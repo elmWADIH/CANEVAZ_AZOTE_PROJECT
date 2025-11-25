@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.controller.Page2Controller"
+      styleClass="root">
+
+    <!-- Header -->
+    <HBox styleClass="header" alignment="CENTER">
+        <padding><Insets top="20" right="30" bottom="20" left="30"/></padding>
+        <Label text="🍊 Calculateur d'Azote pour Agrumes" styleClass="header-title">
+            <font><Font size="24" name="System Bold"/></font>
+        </Label>
+    </HBox>
+
+    <!-- Progress Indicator -->
+    <HBox alignment="CENTER" spacing="30" styleClass="progress-bar">
+        <padding><Insets top="15" right="30" bottom="15" left="30"/></padding>
+        
+        <VBox alignment="CENTER" spacing="5">
+            <Label text="1" styleClass="progress-step-done"/>
+            <Label text="Configuration" styleClass="progress-label-inactive"/>
+        </VBox>
+        
+        <Label text="→" styleClass="progress-arrow"/>
+        
+        <VBox alignment="CENTER" spacing="5">
+            <Label text="2" styleClass="progress-step-active"/>
+            <Label text="Calcul" styleClass="progress-label-active"/>
+        </VBox>
+        
+        <Label text="→" styleClass="progress-arrow"/>
+        
+        <VBox alignment="CENTER" spacing="5">
+            <Label text="3" styleClass="progress-step-inactive"/>
+            <Label text="Historique" styleClass="progress-label-inactive"/>
+        </VBox>
+    </HBox>
+
+    <!-- Main Content -->
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="content-scroll">
+        <VBox spacing="20" styleClass="content">
+            <padding><Insets top="30" right="40" bottom="30" left="40"/></padding>
+
+            <!-- Page Title -->
+            <VBox spacing="5">
+                <Label text="Calcul d'Azote" styleClass="page-title">
+                    <font><Font size="20" name="System Bold"/></font>
+                </Label>
+                <Label text="Résultats du calcul des besoins en azote" styleClass="page-subtitle"/>
+            </VBox>
+
+            <!-- Leaf Analysis Input Card -->
+            <VBox spacing="10" styleClass="card">
+                <Label text="Données Supplémentaires" styleClass="section-title">
+                    <font><Font size="14" name="System Bold"/></font>
+                </Label>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Teneur Foliaire en Azote (%):" styleClass="label"/>
+                    <TextField fx:id="leafNitrogenField" promptText="Optionnel" prefWidth="150"/>
+                    <Label text="Uniquement si vous avez des résultats d'analyse foliaire" 
+                           styleClass="hint-label"/>
+                </HBox>
+            </VBox>
+
+            <!-- Step 1: Basic Needs Card -->
+            <VBox spacing="15" styleClass="card-calculation">
+                <Label text="ÉTAPE 1 : Calcul des Besoins de Base" styleClass="calculation-header"/>
+
+                <GridPane hgap="10" vgap="10">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="250" prefWidth="250"/>
+                        <ColumnConstraints minWidth="100" prefWidth="100"/>
+                        <ColumnConstraints minWidth="50" prefWidth="50"/>
+                    </columnConstraints>
+
+                    <Label text="Exportation par les Récoltes:" styleClass="calc-label" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                    <Label fx:id="harvestValueLabel" text="0" styleClass="calc-value" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                    <Label text="U" styleClass="calc-unit" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+
+                    <Label text="Exportation par la Taille:" styleClass="calc-label" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                    <Label fx:id="pruningValueLabel" text="0" styleClass="calc-value" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                    <Label text="U" styleClass="calc-unit" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+
+                    <Label text="Prélèvements par l'Herbe:" styleClass="calc-label" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                    <Label fx:id="weedValueLabel" text="0" styleClass="calc-value" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                    <Label text="U" styleClass="calc-unit" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+                </GridPane>
+
+                <Separator/>
+
+                <HBox spacing="10" alignment="CENTER_LEFT" styleClass="total-row">
+                    <Label text="Total des Besoins:" styleClass="calc-total-label">
+                        <font><Font size="15" name="System Bold"/></font>
+                    </Label>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label fx:id="basicTotalLabel" text="0" styleClass="calc-total-value">
+                        <font><Font size="16" name="System Bold"/></font>
+                    </Label>
+                    <Label text="U" styleClass="calc-unit">
+                        <font><Font size="14"/></font>
+                    </Label>
+                </HBox>
+            </VBox>
+
+            <!-- Step 2: Leaf Analysis Correction Card -->
+            <VBox spacing="15" styleClass="card-correction">
+                <Label text="ÉTAPE 2 : Corrections d'Après les Résultats d'Analyses" styleClass="correction-header"/>
+
+                <GridPane hgap="10" vgap="10">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="250" prefWidth="250"/>
+                        <ColumnConstraints minWidth="100" prefWidth="100"/>
+                        <ColumnConstraints minWidth="50" prefWidth="50"/>
+                    </columnConstraints>
+
+                    <Label text="Correction Foliaire:" styleClass="calc-label" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                    <Label fx:id="correctionValueLabel" text="0" styleClass="calc-value" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                    <Label text="U" styleClass="calc-unit" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                </GridPane>
+            </VBox>
+
+            <!-- Final Results Card -->
+            <VBox spacing="15" styleClass="card-final">
+                <padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
+                
+                <Label text="TOTAL AZOTE NÉCESSAIRE" styleClass="final-title">
+                    <font><Font size="18" name="System Bold"/></font>
+                </Label>
+                
+                <HBox alignment="CENTER" spacing="5">
+                    <Label fx:id="finalTotalLabel" text="0" styleClass="final-value">
+                        <font><Font size="42" name="System Bold"/></font>
+                    </Label>
+                    <Label text="U/ha" styleClass="final-unit">
+                        <font><Font size="24"/></font>
+                    </Label>
+                </HBox>
+            </VBox>
+
+            <!-- Action Buttons -->
+            <HBox spacing="15" alignment="CENTER_RIGHT" styleClass="button-bar">
+                <Button text="← Retour" onAction="#handleBack" styleClass="secondary-button"/>
+                <Button text="Voir l'Historique" onAction="#handleViewHistory" styleClass="secondary-button"/>
+                <Button text="Enregistrer" onAction="#handleSaveToHistory" styleClass="secondary-button"/>
+                <Button text="Exporter PDF" onAction="#handleExportPDF" styleClass="primary-button"/>
+            </HBox>
+
+        </VBox>
+    </ScrollPane>
+
+</VBox>

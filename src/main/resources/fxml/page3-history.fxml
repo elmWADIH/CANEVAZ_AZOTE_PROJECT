@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.controller.Page3Controller"
+      styleClass="root">
+
+    <!-- Header -->
+    <HBox styleClass="header" alignment="CENTER">
+        <padding><Insets top="20" right="30" bottom="20" left="30"/></padding>
+        <Label text="🍊 Calculateur d'Azote pour Agrumes" styleClass="header-title">
+            <font><Font size="24" name="System Bold"/></font>
+        </Label>
+    </HBox>
+
+    <!-- Progress Indicator -->
+    <HBox alignment="CENTER" spacing="30" styleClass="progress-bar">
+        <padding><Insets top="15" right="30" bottom="15" left="30"/></padding>
+        
+        <VBox alignment="CENTER" spacing="5">
+            <Label text="1" styleClass="progress-step-done"/>
+            <Label text="Configuration" styleClass="progress-label-inactive"/>
+        </VBox>
+        
+        <Label text="→" styleClass="progress-arrow"/>
+        
+        <VBox alignment="CENTER" spacing="5">
+            <Label text="2" styleClass="progress-step-done"/>
+            <Label text="Calcul" styleClass="progress-label-inactive"/>
+        </VBox>
+        
+        <Label text="→" styleClass="progress-arrow"/>
+        
+        <VBox alignment="CENTER" spacing="5">
+            <Label text="3" styleClass="progress-step-active"/>
+            <Label text="Historique" styleClass="progress-label-active"/>
+        </VBox>
+    </HBox>
+
+    <!-- Main Content -->
+    <VBox VBox.vgrow="ALWAYS" styleClass="content-bg">
+        
+        <!-- Filter Bar -->
+        <HBox spacing="15" alignment="CENTER_LEFT" styleClass="filter-bar">
+            <padding><Insets top="20" right="30" bottom="20" left="30"/></padding>
+            
+            <Label text="HISTORIQUE DES CALCULS" styleClass="page-title">
+                <font><Font size="20" name="System Bold"/></font>
+            </Label>
+            
+            <Region HBox.hgrow="ALWAYS"/>
+            
+            <Label text="Rechercher:" styleClass="label"/>
+            <TextField fx:id="searchField" promptText="Rechercher..." prefWidth="250"/>
+            
+            <Label text="Variété:" styleClass="label"/>
+            <ComboBox fx:id="varietyFilter" prefWidth="200"/>
+        </HBox>
+
+        <!-- Table -->
+        <TableView fx:id="historyTable" VBox.vgrow="ALWAYS" styleClass="history-table">
+            <columns>
+                <TableColumn text="Date" prefWidth="150"/>
+                <TableColumn text="Variété" prefWidth="120"/>
+                <TableColumn text="Superficie" prefWidth="100"/>
+                <TableColumn text="Rendement" prefWidth="100"/>
+                <TableColumn text="Azote Total" prefWidth="120"/>
+            </columns>
+            <placeholder>
+                <Label text="Aucun calcul enregistré" styleClass="placeholder-label"/>
+            </placeholder>
+        </TableView>
+
+        <!-- Status Bar -->
+        <HBox alignment="CENTER_LEFT" spacing="10" styleClass="status-bar">
+            <padding><Insets top="10" right="30" bottom="10" left="30"/></padding>
+            <Label text="0 calcul(s) trouvé(s)" styleClass="status-label"/>
+        </HBox>
+
+        <!-- Action Buttons -->
+        <HBox spacing="15" alignment="CENTER_RIGHT" styleClass="button-bar">
+            <padding><Insets top="20" right="30" bottom="30" left="30"/></padding>
+            
+            <Button text="Nouveau Calcul" onAction="#handleNewCalculation" styleClass="primary-button"/>
+            
+            <Region HBox.hgrow="ALWAYS"/>
+            
+            <Button text="Exporter en PDF" onAction="#handleExportPDF" styleClass="action-button"/>
+            <Button text="Supprimer" onAction="#handleDelete" styleClass="danger-button"/>
+            <Button text="Tout Effacer" onAction="#handleClearAll" styleClass="danger-button"/>
+        </HBox>
+
+    </VBox>
+
+</VBox>
